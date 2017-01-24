@@ -1,0 +1,116 @@
+app\models\SendAct::__set_state(array(
+   '_attributes' => 
+  array (
+    'id' => 94,
+    'act_id' => 44,
+    'cartridge_id' => 6,
+    'problem' => 'вертикальные черные полосы',
+    'weidth' => NULL,
+    'create_at' => 1477503836,
+    'modify_at' => NULL,
+    'status' => 1,
+    'komplekt' => 'Картридж + чип',
+    'departament_id' => 24,
+  ),
+   '_oldAttributes' => 
+  array (
+    'id' => 94,
+    'act_id' => 44,
+    'cartridge_id' => 6,
+    'problem' => 'вертикальные черные полосы',
+    'weidth' => NULL,
+    'create_at' => 1477503836,
+    'modify_at' => NULL,
+    'status' => 1,
+    'komplekt' => 'Картридж + чип',
+    'departament_id' => 24,
+  ),
+   '_related' => 
+  array (
+    'serviceSend' => 
+    app\models\ServiceSend::__set_state(array(
+       '_attributes' => 
+      array (
+        'id' => 14,
+        'send_act_id' => 44,
+        'create_at' => 1477503780,
+        'customer_id' => 1,
+        'contractor_id' => 3,
+      ),
+       '_oldAttributes' => 
+      array (
+        'id' => 14,
+        'send_act_id' => 44,
+        'create_at' => 1477503780,
+        'customer_id' => 1,
+        'contractor_id' => 3,
+      ),
+       '_related' => 
+      array (
+      ),
+       '_errors' => NULL,
+       '_validators' => NULL,
+       '_scenario' => 'default',
+       '_events' => 
+      array (
+      ),
+       '_behaviors' => 
+      array (
+      ),
+    )),
+    'cartridges' => 
+    app\models\Cartridges::__set_state(array(
+       '_attributes' => 
+      array (
+        'id' => 6,
+        'model' => 'Canon 728',
+        'printer_id' => 6,
+        'serial' => '1F23M1Da',
+        'inv_number' => 127,
+        'service' => 0,
+        'status' => 1,
+        'note' => NULL,
+        'resource' => 1000,
+        'basket' => 0,
+        'supplier_id' => 3,
+        'inv_service' => NULL,
+      ),
+       '_oldAttributes' => 
+      array (
+        'id' => 6,
+        'model' => 'Canon 728',
+        'printer_id' => 6,
+        'serial' => '1F23M1Da',
+        'inv_number' => 127,
+        'service' => 0,
+        'status' => 1,
+        'note' => NULL,
+        'resource' => 1000,
+        'basket' => 0,
+        'supplier_id' => 3,
+        'inv_service' => NULL,
+      ),
+       '_related' => 
+      array (
+      ),
+       '_errors' => NULL,
+       '_validators' => NULL,
+       '_scenario' => 'default',
+       '_events' => 
+      array (
+      ),
+       '_behaviors' => 
+      array (
+      ),
+    )),
+  ),
+   '_errors' => NULL,
+   '_validators' => NULL,
+   '_scenario' => 'default',
+   '_events' => 
+  array (
+  ),
+   '_behaviors' => 
+  array (
+  ),
+))
