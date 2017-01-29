@@ -1,0 +1,81 @@
+app\models\Supplier::__set_state(array(
+   '_attributes' => 
+  array (
+    'title' => 'Микролайн',
+    'note' => 'Конкурс',
+    'id' => 9,
+  ),
+   '_oldAttributes' => 
+  array (
+    'title' => 'Микролайн',
+    'note' => 'Конкурс',
+    'id' => 9,
+  ),
+   '_related' => 
+  array (
+  ),
+   '_errors' => 
+  array (
+  ),
+   '_validators' => 
+  ArrayObject::__set_state(array(
+     0 => 
+    yii\validators\RequiredValidator::__set_state(array(
+       'skipOnEmpty' => false,
+       'requiredValue' => NULL,
+       'strict' => false,
+       'message' => 'Необходимо заполнить «{attribute}».',
+       'attributes' => 
+      array (
+        0 => 'title',
+      ),
+       'on' => 
+      array (
+      ),
+       'except' => 
+      array (
+      ),
+       'skipOnError' => true,
+       'enableClientValidation' => true,
+       'isEmpty' => NULL,
+       'when' => NULL,
+       'whenClient' => NULL,
+       '_events' => 
+      array (
+      ),
+       '_behaviors' => NULL,
+    )),
+     1 => 
+    yii\validators\DefaultValueValidator::__set_state(array(
+       'value' => NULL,
+       'skipOnEmpty' => false,
+       'attributes' => 
+      array (
+        0 => 'note',
+      ),
+       'message' => NULL,
+       'on' => 
+      array (
+      ),
+       'except' => 
+      array (
+      ),
+       'skipOnError' => true,
+       'enableClientValidation' => true,
+       'isEmpty' => NULL,
+       'when' => NULL,
+       'whenClient' => NULL,
+       '_events' => 
+      array (
+      ),
+       '_behaviors' => NULL,
+    )),
+  )),
+   '_scenario' => 'default',
+   '_events' => 
+  array (
+  ),
+   '_behaviors' => 
+  array (
+  ),
+))

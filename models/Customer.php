@@ -4,13 +4,18 @@ use yii\db\ActiveRecord;
 
 class Customer extends ActiveRecord{
 
-    public function saveCustomer($model){
+    public function rules(){
+        return [
+            [['name', 'nameRP', 'position'], 'required'],
+        ];
+    }
 
-        $this->name = $model->name;
-        $this->nameRP = $model->nameRP;
-        $this->position = $model->position;
-        $this->save();
-
+    public function attributeLabels(){
+        return [
+            'name' => 'Ф.И.О',
+            'nameRP' => 'Ф.И.О в род.падеже',
+            'position' => 'Должность',
+        ];
     }
 
 }

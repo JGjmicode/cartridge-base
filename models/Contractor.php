@@ -4,14 +4,20 @@ use yii\db\ActiveRecord;
 
 class Contractor extends ActiveRecord{
 
-    public function saveContractor($model){
+    public function rules(){
+        return [
+            [['title', 'person', 'e_mail', 'phone'], 'required'],
+            [['e_mail'], 'email'],
+        ];
+    }
 
-        $this->title = $model->title;
-        $this->person = $model->person;
-        $this->e_mail = $model->eMail;
-        $this->phone = $model->phone;
-        $this->save();
-
+    public function attributeLabels(){
+        return [
+            'title' => 'Организация',
+            'person' => 'Представитель',
+            'e_mail' => 'E-Mail',
+            'phone' => 'Номер телефона'
+        ];
     }
 
 }

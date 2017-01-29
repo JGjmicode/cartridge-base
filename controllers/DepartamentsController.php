@@ -23,11 +23,8 @@ class DepartamentsController extends BehaviorsController{
     }
 
     public function actionAdd(){
-        $model = new DepartamentsEditForm();
-        //$model = new PrintersTypesForm();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $departament = new Departaments();
-            $departament->editDepartament($model);
+        $model = new Departaments();
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(['/departaments/index']);
         }
         return $this->render('edit', [
@@ -36,14 +33,8 @@ class DepartamentsController extends BehaviorsController{
     }
 
     public function actionUpdate(){
-        $model = new DepartamentsEditForm();
-        $id = Yii::$app->request->get('id');
-        $departament = Departaments::findOne($id);
-        $model->name = $departament->name;
-        $model->cabinet = $departament->cabinet;
-        $model->printerTypesId = $departament->printer_types_id;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $departament->editDepartament($model);
+        $model = Departaments::findOne(Yii::$app->request->get('id'));
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(['/departaments/index']);
         }
         return $this->render('edit',[
@@ -52,8 +43,8 @@ class DepartamentsController extends BehaviorsController{
     }
 
     public function actionDelete(){
-        $id = Yii::$app->request->get('id');
-        Departaments::deleteDepartament($id);
+        $model = Departaments::findOne(Yii::$app->request->get('id'));
+        $model->delete();
         return $this->redirect(['/departaments/index']);
 
     }

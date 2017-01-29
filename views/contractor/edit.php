@@ -13,7 +13,7 @@ $form = ActiveForm::begin();
 ?>
 <?=$form->field($model, 'title')?>
 <?=$form->field($model, 'person')?>
-<?=$form->field($model, 'eMail')?>
+<?=$form->field($model, 'e_mail')?>
 <?=$form->field($model, 'phone')?>
 <?=Html::submitButton('Сохранить', ['class' => 'btn btn-primary'])?>
 <?php ActiveForm::end();?>

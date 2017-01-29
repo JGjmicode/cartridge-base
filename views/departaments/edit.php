@@ -19,9 +19,9 @@ $this->title = 'Добавление/редактирование отдела';
 <?= $form->field($model, 'name') ?>
 <?= $form->field($model, 'cabinet') ?>
 <?php
-$print_types = empty($model->printerTypesId) ? 'Выберите тип принтера' : is_null(PrintersTypes::findOne($model->printerTypesId)) ? 'Тип не выбран' : PrintersTypes::findOne($model->printerTypesId)->types;
+$print_types = empty($model->printer_types_id) ? 'Выберите тип принтера' : is_null(PrintersTypes::findOne($model->printer_types_id)) ? 'Тип не выбран' : PrintersTypes::findOne($model->printer_types_id)->types;
 $get_types = Url::to(['/printers-types/get-types']);
-echo $form->field($model, 'printerTypesId')->label('Тип принтера:&nbsp')->widget(Select2::classname(), [
+echo $form->field($model, 'printer_types_id')->label('Тип принтера:&nbsp')->widget(Select2::classname(), [
     'initValueText' => $print_types, // set the initial display text
     'options' => ['placeholder' => 'Выберите тип принтера ...'],
     'pluginOptions' => [

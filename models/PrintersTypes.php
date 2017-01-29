@@ -3,17 +3,23 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 class PrintersTypes extends ActiveRecord{
-    
-    public function savePrintersTypes($model){
-        $this->types = $model->types;
-        $this->total = $model->total;
-        $this->save();
+
+    public function rules(){
+        return [
+            [['types'], 'required'],
+            [['total'], 'integer', 'message' => 'Введите число'],
+
+        ];
     }
-    
-    public static function deletePrinterstypes($id){
-        $type = self::findOne($id);
-        $type->delete();
+
+    public function attributeLabels()
+    {
+        return [
+            'types' => 'Типы принтеров',
+            'total' => 'Количество картриджей',
+        ];
     }
+
 }
 
 

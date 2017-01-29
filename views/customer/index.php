@@ -19,9 +19,14 @@ $this->title = 'Заказчики';
         'label' => 'Ф.И.О. в род.падеже'],
         ['attribute' => 'position',
          'label' => 'Должность'],
+
         [
             'class' => 'yii\grid\ActionColumn',
             'template' => '{update}',
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{delete}',
         ],
 
     ]

@@ -22,10 +22,8 @@ class PrintersTypesController extends BehaviorsController
     }
     
     public function actionAdd(){
-        $types = new PrintersTypes;
-        $model = new PrintersTypesForm;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $types->savePrintersTypes($model);
+        $model = new PrintersTypes;
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['printers-types/index']));
         }else{
             return $this->render('edit-types', ['model' => $model]);
@@ -33,12 +31,8 @@ class PrintersTypesController extends BehaviorsController
     }
     
     public function actionUpdate(){
-        $model = new PrintersTypesForm;
-        $type = PrintersTypes::findOne(Yii::$app->request->get('id'));
-        $model->types = $type->types;
-        $model->total = $type->total;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $type->savePrintersTypes($model);
+        $model = PrintersTypes::findOne(Yii::$app->request->get('id'));
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['printers-types/index']));
         }else{
             return $this->render('edit-types', ['model' => $model]);
@@ -46,7 +40,8 @@ class PrintersTypesController extends BehaviorsController
     }
     
     public function actionDelete(){
-        PrintersTypes::deletePrintersTypes(Yii::$app->request->get('id'));
+        $model = PrintersTypes::findOne(Yii::$app->request->get('id'));
+        $model->delete();
         return $this->redirect(Url::to(['printers-types/index']));
     }
     

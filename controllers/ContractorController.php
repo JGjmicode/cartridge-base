@@ -21,10 +21,8 @@ class ContractorController extends BehaviorsController{
     }
 
     public function actionAdd(){
-        $model = new ContractorForm();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $contractor = new Contractor();
-            $contractor->saveContractor($model);
+        $model = new Contractor();
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/contractor/index' ]));
         }
         return $this->render('edit', [
@@ -33,19 +31,19 @@ class ContractorController extends BehaviorsController{
     }
 
     public function actionUpdate(){
-        $model = new ContractorForm();
-        $contractor = Contractor::findOne(Yii::$app->request->get('id'));
-        $model->title = $contractor->title;
-        $model->person = $contractor->person;
-        $model->eMail = $contractor->e_mail;
-        $model->phone = $contractor->phone;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $contractor->saveContractor($model);
+        $model = Contractor::findOne(Yii::$app->request->get('id'));
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/contractor/index' ]));
         }
         return $this->render('edit', [
             'model' => $model
         ]);
+    }
+
+    public function actionDelete(){
+        $model = Contractor::findOne(Yii::$app->request->get('id'));
+        $model->delete();
+        return $this->redirect(Url::to(['/contractor/index' ]));
     }
 
 }

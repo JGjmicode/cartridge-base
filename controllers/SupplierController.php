@@ -21,10 +21,8 @@ class SupplierController extends BehaviorsController{
     }
 
     public function actionAdd(){
-        $model = new SupplierForm();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $supplier = new Supplier();
-            $supplier->saveSupplier($model);
+        $model = new Supplier();
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/supplier/index' ]));
         }
         return $this->render('edit', [
@@ -33,17 +31,19 @@ class SupplierController extends BehaviorsController{
     }
 
     public function actionUpdate(){
-        $model = new SupplierForm();
-        $supplier = Supplier::findOne(Yii::$app->request->get('id'));
-        $model->title = $supplier->title;
-        $model->note = $supplier->note;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $supplier->saveSupplier($model);
+        $model = Supplier::findOne(Yii::$app->request->get('id'));
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/supplier/index' ]));
         }
         return $this->render('edit', [
             'model' => $model
         ]);
+    }
+
+    public function actionDelete(){
+        $supplier = Supplier::findOne(Yii::$app->request->get('id'));
+        $supplier->delete();
+        return $this->redirect(Url::to(['supplier/index']));
     }
 
 }

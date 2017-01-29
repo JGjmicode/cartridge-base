@@ -20,33 +20,38 @@ class CartridgesController extends BehaviorsController{
     }
     
     public function actionAdd(){
-        $cartridge = new Cartridges;
-        $model = new CartridgesForm;
+        $model = new Cartridges;
         $invNumber =  Cartridges::getMaxInvNumber();
         $model->inv_number = $invNumber;
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $cartridge->saveCartridge($model);
-            return $this->redirect(Url::to(['cartridges/index']));
+            if(is_null($model->serial)) {
+                $model->serial = 'б/н';
+            }
+            if(is_null($model->supplier_id)) {
+                $model->supplier_id = 1;
+            }
+            if($model->save()){
+                return $this->redirect(Url::to(['cartridges/index']));
+            }
+
         }else{
             return $this->render('edit-cartridge', ['model' => $model, 'invNumber' => $invNumber]);
         }
     }
     
     public function actionUpdate(){
-        $model = new CartridgesForm;
+        $model = Cartridges::findOne(Yii::$app->request->get('id'));
         $invNumber =  Cartridges::getMaxInvNumber();
-        $cartridge = Cartridges::findOne(Yii::$app->request->get('id'));
-        $model->model = $cartridge->model;
-        $model->serial = $cartridge->serial;
-        $model->printer_id = $cartridge->printer_id;
-        $model->inv_number = $cartridge->inv_number;
-        $model->inv_service = $cartridge->inv_service;
-        $model->note = $cartridge->note;
-        $model->supplier_id = $cartridge->supplier_id;
-        $model->resource = $cartridge->resource;
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $cartridge->saveCartridge($model);
-            return $this->redirect(Url::to(['cartridges/index']));
+            if(is_null($model->serial)) {
+                $model->serial = 'б/н';
+            }
+            if(is_null($model->supplier_id)) {
+                $model->supplier_id = 1;
+            }
+            if($model->save()){
+                return $this->redirect(Url::to(['cartridges/index']));
+            }
         }else{
             return $this->render('edit-cartridge', ['model' => $model, 'invNumber' => $invNumber]);
         }

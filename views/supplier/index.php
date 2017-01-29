@@ -22,6 +22,10 @@ $this->title = 'Поставщики';
             'class' => 'yii\grid\ActionColumn',
             'template' => '{update}',
         ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{delete}',
+        ],
 
     ]
 ])?>

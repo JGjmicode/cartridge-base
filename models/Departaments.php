@@ -8,16 +8,18 @@ class Departaments extends ActiveRecord{
         return $this->hasOne(PrintersTypes::className(), ['id' => 'printer_types_id']);
     }
 
-    public function editDepartament($model){
-        $this->name = $model->name;
-        $this->cabinet = $model->cabinet;
-        $this->printer_types_id = $model->printerTypesId;
-        $this->save();
-
+    public function rules(){
+        return [
+            [['name'], 'required'],
+            [['cabinet', 'printer_types_id'], 'default'],
+        ];
     }
 
-    public static function deleteDepartament($id){
-        $departament = self::findOne($id);
-        $departament->delete();
+    public function attributeLabels(){
+        return [
+            'name' => 'Название отдела',
+            'cabinet' => 'Номер кабинета',
+            'printer_types_id' => 'Тип принтера',
+        ];
     }
 }

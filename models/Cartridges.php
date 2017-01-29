@@ -19,36 +19,35 @@ class Cartridges extends ActiveRecord{
     }
 
 
-    public function saveCartridge($model){
-        $this->model = $model->model;
-        $this->printer_id = $model->printer_id;
-        if(!is_null($model->serial)) {
-            $this->serial = $model->serial;
-        }else{
-            $this->serial = 'б/н';
-        }
-        $this->inv_number = $model->inv_number;
-        $this->inv_service = $model->inv_service;
-        if(is_null($model->supplier_id)){
-            $this->supplier_id = 1;
-        }else{
-            $this->supplier_id = $model->supplier_id;
-        }
-        $this->note = $model->note;
-        if(!is_null($model->resource)) {
-            $this->resource = $model->resource;
-        }else{
-            $this->resource = 0;
-        }
-        $this->save();
-    }
-    
     public static function deleteCartridge($id = NULL){
         if(!is_null($id)){
             $cartridge = self::findOne($id);
             $cartridge->status = false;
             $cartridge->save();
         }
+    }
+
+    public function rules(){
+        return [
+            [['printer_id', 'model', 'inv_number' ], 'required'],
+            [['serial', 'note', 'resource', 'supplier_id', 'inv_service'], 'default'],
+
+        ];
+    }
+
+
+    public function attributeLabels()
+    {
+        return [
+            'printer_id' => 'Типы принтеров',
+            'model' => 'Модель',
+            'inv_number' => 'Инвентарный номер',
+            'serial' => 'Серийный номер',
+            'note' => 'Примечание',
+            'resource' => 'Ресурс картриджа',
+            'supplier_id' => 'Поставщик',
+            'inv_service' => 'Инвентарный номер сервиса'
+        ];
     }
 
     public static function getMaxInvNumber(){

@@ -22,10 +22,8 @@ class CustomerController extends BehaviorsController{
     }
 
     public function actionAdd(){
-        $model = new CustomerForm();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $customer = new Customer();
-            $customer->saveCustomer($model);
+        $model = new Customer();
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/customer/index' ]));
         }
         return $this->render('edit', [
@@ -34,18 +32,19 @@ class CustomerController extends BehaviorsController{
     }
 
     public function actionUpdate(){
-        $model = new CustomerForm();
-        $customer = Customer::findOne(Yii::$app->request->get('id'));
-        $model->name = $customer->name;
-        $model->nameRP = $customer->nameRP;
-        $model->position = $customer->position;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $customer->saveCustomer($model);
+        $model = Customer::findOne(Yii::$app->request->get('id'));
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(Url::to(['/customer/index' ]));
         }
         return $this->render('edit', [
             'model' => $model
         ]);
+    }
+
+    public function actionDelete(){
+        $model = Customer::findOne(Yii::$app->request->get('id'));
+        $model->delete();
+        return $this->redirect(Url::to(['/customer/index' ]));
     }
 
 }
