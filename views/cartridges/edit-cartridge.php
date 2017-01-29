@@ -24,10 +24,21 @@ $this->title = 'Добавление/изменение картриджа';
         ); 
 ?>
 
-<?= $form->field($model, 'model') ?>  
-<?= $form->field($model, 'serial') ?> 
-<?= $form->field($model, 'inv_number') ?> 
-<?= $form->field($model, 'inv_service') ?>
+<div class="col-md-3">
+        <?= $form->field($model, 'model') ?>
+</div>
+<div class="col-md-3">
+        <?= $form->field($model, 'serial') ?>
+</div>
+<div class="col-md-2">
+        <?= $form->field($model, 'inv_number') ?>
+</div>
+<div class="col-md-2"style="top:25px;">
+        <?= Html::Button('Новый номер', ['class' => 'btn btn-warning', 'onclick' => 'getMaxInvNumber()'])?>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-3">
 <?php
         $print_types = empty($model->printer_id) ? 'Выберите тип принтера' : is_null(PrintersTypes::findOne($model->printer_id)) ? 'Тип не выбран' : PrintersTypes::findOne($model->printer_id)->types;
         $get_types = Url::to(['/printers-types/get-types']);
@@ -48,13 +59,32 @@ $this->title = 'Добавление/изменение картриджа';
         ],
         ]);
 ?>
+</div>
+<div class="col-md-3">
 <?=$form->field($model, 'supplier_id')->dropdownList(
 Supplier::find()->select(['title', 'id'])->indexBy('id')->column(),
 ['prompt'=>'Выберите поставщика'])?>
-<?= $form->field($model, 'resource') ?> 
-<?= $form->field($model, 'note') ?> 
-<?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary'])?>
+</div>
+<div class="col-md-3">
+<?= $form->field($model, 'resource') ?>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-9">
+<?= $form->field($model, 'note') ?>
+</div>
+<div class="clearfix"></div>
 
+<div class="text-center">
+<?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary'])?>
+</div>
 <?php ActiveForm::end(); ?>
+
+<script>
+        function getMaxInvNumber(){
+                var invNumber = "<?=$invNumber?>";
+                $("#cartridgesform-inv_number").val(invNumber);
+        }
+</script>
+
 
 

@@ -22,17 +22,19 @@ class CartridgesController extends BehaviorsController{
     public function actionAdd(){
         $cartridge = new Cartridges;
         $model = new CartridgesForm;
+        $invNumber =  Cartridges::getMaxInvNumber();
+        $model->inv_number = $invNumber;
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $cartridge->saveCartridge($model);
             return $this->redirect(Url::to(['cartridges/index']));
         }else{
-            return $this->render('edit-cartridge', ['model' => $model]);
-            //return $this->redirect(Url::to(['cartridges/index']));
+            return $this->render('edit-cartridge', ['model' => $model, 'invNumber' => $invNumber]);
         }
     }
     
     public function actionUpdate(){
         $model = new CartridgesForm;
+        $invNumber =  Cartridges::getMaxInvNumber();
         $cartridge = Cartridges::findOne(Yii::$app->request->get('id'));
         $model->model = $cartridge->model;
         $model->serial = $cartridge->serial;
@@ -46,7 +48,7 @@ class CartridgesController extends BehaviorsController{
             $cartridge->saveCartridge($model);
             return $this->redirect(Url::to(['cartridges/index']));
         }else{
-            return $this->render('edit-cartridge', ['model' => $model]);
+            return $this->render('edit-cartridge', ['model' => $model, 'invNumber' => $invNumber]);
         }
     }
     

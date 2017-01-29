@@ -50,5 +50,10 @@ class Cartridges extends ActiveRecord{
             $cartridge->save();
         }
     }
+
+    public static function getMaxInvNumber(){
+        $invNumber = self::find();
+        return $invNumber->max('inv_number') + 1;
+    }
 }
 
