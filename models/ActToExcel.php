@@ -14,6 +14,7 @@ use PHPExcel_Style_Alignment;
 use PHPExcel_Style_Border;
 use yii\i18n\Formatter;
 use app\models\Cartridges;
+use app\models\Repairs;
 
 class ActToExcel extends Model{
 
@@ -249,6 +250,61 @@ class ActToExcel extends Model{
 
 
         $outputFileName = "Location-report";
+        header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
+        header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
+        header ( "Cache-Control: no-cache, must-revalidate" );
+        header ( "Pragma: no-cache" );
+        header ( "Content-type: application/vnd.ms-excel" );
+        header ( "Content-Disposition: attachment; filename=$outputFileName" );
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+    }
+
+    public static function saveRepairsReport(){
+        $filepath = 'export/repairs.xls';
+
+        $inputFileType = PHPExcel_IOFactory::identify($filepath);  // узнаем тип файла, excel может хранить файлы в разных форматах, xls, xlsx и другие
+        $objReader = PHPExcel_IOFactory::createReader($inputFileType); // создаем объект для чтения файла
+        $objPHPExcel = $objReader->load($filepath); // загружаем данные файла в объект
+        $sheet = $objPHPExcel->getActiveSheet();
+
+        $repairs = Repairs::find()->all();
+        $sheet->getStyle('A4:E4')->applyFromArray(['font' => ['bold' => true]]);
+        $index = 5;
+        foreach ($repairs  as $repair) {
+            $sheet->setCellValue('A'.$index, $repair->model);
+            $sheet->setCellValue('B'.$index, $repair->invNumber);
+            $sheet->setCellValue('C'.$index, $repair->cabinet);
+            $sheet->setCellValue('D'.$index, $repair->problem);
+            $sheet->setCellValue('E'.$index, $repair->note);
+            $sheet->getStyle('A'.$index.':E'.$index)->applyFromArray(['alignment' => ['wrap' => true, 'horizontal' 	=> PHPExcel_Style_Alignment::HORIZONTAL_JUSTIFY,]]);
+            $sheet->getRowDimension($index)->setRowHeight(-1);
+            $index++;
+        }
+
+        $sheet->getStyle('A5:E'.($index-1))->getAlignment()->setHorizontal(
+            PHPExcel_Style_Alignment::HORIZONTAL_LEFT)->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);;
+        $style_wrap = array(
+            //рамки
+            'borders'=>array(
+                //внешняя рамка
+                'outline' => array(
+                    'style'=>PHPExcel_Style_Border::BORDER_THIN
+                ),
+                //внутренняя
+                'allborders'=>array(
+                    'style'=>PHPExcel_Style_Border::BORDER_THIN,
+                    'color' => array(
+                        'rgb'=>'696969'
+                    )
+                )
+            )
+        );
+//применяем массив стилей к ячейкам
+        $sheet->getStyle('A5:E'.($index-1))->applyFromArray($style_wrap);
+
+
+        $outputFileName = "repairs-report";
         header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
         header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
         header ( "Cache-Control: no-cache, must-revalidate" );

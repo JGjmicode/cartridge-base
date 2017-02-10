@@ -1,8 +1,12 @@
 array (
-  '_csrf' => 'bC1NcjJfT0klGQsrC2seK15qCxBqLSE5VWkeQ0M1BRZbGgsZQQV5cA==',
-  'Supplier' => 
+  '_csrf' => 'THZrM0hiZm8iGThdBjcuAi07JwomUCRfFUUffCorFFcEBR1UJhUIJw==',
+  'Repairs' => 
   array (
-    'title' => 'Микролайн',
-    'note' => 'Конкурс',
+    'model' => 'HP LaserJet 5550',
+    'invNumber' => '123123123',
+    'cabinet' => '343',
+    'problem' => 'шумит гудит не печатает не сканирует',
+    'note' => 'ваывыва фыва фыва 
+фыва фывао фыва фыва ываф ываф ывафыв',
   ),
 )

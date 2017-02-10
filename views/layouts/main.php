@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use kartik\nav\NavX;
 
 AppAsset::register($this);
 ?>
@@ -39,10 +40,15 @@ AppAsset::register($this);
     ];
     if(!Yii::$app->user->isGuest) {
         $menuItems['items'][] = ['label' => 'Главная', 'url' => ['/site/index']];
-        $menuItems['items'][] = ['label' => 'Передача картриджей', 'items' => [
-            ['label' => 'Передача в сервис', 'url' => ['/service/send']],
-            ['label' => 'Возврат из сервиса', 'url' => ['/service/get']],
-        ]];
+        $menuItems['items'][] = ['label' => 'Ремонты', 'items' => [
+            ['label' => 'Ремонт картриджей', 'items' => [
+                ['label' => 'Передача в сервис', 'url' => ['/service/send']],
+                ['label' => 'Возврат из сервиса', 'url' => ['/service/get']],
+            ]],
+            ['label' => 'Ремонт техники', 'items' => [
+                    ['label' => 'Неисправности', 'url' => ['/repairs/index']],
+            ]]
+            ]];
         $menuItems['items'][] = ['label' => 'Справочники', 'items' => [
             ['label' => 'Картриджи', 'url' => ['/cartridges/index']],
             ['label' => 'Типы принтеров', 'url' => ['/printers-types/index']],
@@ -69,9 +75,19 @@ AppAsset::register($this);
         $menuItems['items'][] = ['label' => 'Войти', 'url' => ['/site/login']];
     }
 
-    echo Nav::widget($menuItems);
+    //echo Nav::widget($menuItems);
+    echo NavX::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => $menuItems['items'],
+        'activateParents' => true,
+        'encodeLabels' => false
+    ]);
+
+
     NavBar::end();
     ?>
+
+
 
     <div class="container">
         <?= Breadcrumbs::widget([

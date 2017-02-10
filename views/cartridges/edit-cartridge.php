@@ -82,7 +82,7 @@ Supplier::find()->select(['title', 'id'])->indexBy('id')->column(),
 <script>
         function getMaxInvNumber(){
                 var invNumber = "<?=$invNumber?>";
-                $("#cartridgesform-inv_number").val(invNumber);
+                $("#cartridges-inv_number").val(invNumber);
         }
 </script>
 

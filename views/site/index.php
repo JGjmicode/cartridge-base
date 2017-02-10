@@ -20,6 +20,14 @@ $this->title = 'Учет картриджей';
         <div class="col-md-9">
             <h4><?=Html::a('Акты возврата из сервиса',['/service/get'])?></h4>
         </div>
+        <div class="clearfix"></div>
+        <h2>Ремонты</h2>
+        <div class="col-md-3">
+            <?=Html::a(Html::img('/../image/repair.png', ['width' => '75px']),['/repairs/index'])?>
+        </div>
+        <div class="col-md-9">
+            <h4><?=Html::a('Список техники в ремонт',['/repairs/index'])?></h4>
+        </div>
     </div>
     <div class="col-md-4">
         <h2>Справочники</h2>
